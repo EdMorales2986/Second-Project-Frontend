@@ -1,0 +1,96 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-back-button slot="start"></ion-back-button>
+    <ion-title>Sign Up</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form (ngSubmit)="onSubmit()" #signInForm="ngForm">
+    <ion-item>
+      <ion-input
+        label="Name"
+        labelPlacement="floating"
+        required
+        type="text"
+        name="Name"
+        errorText="name is required"
+        [(ngModel)]="name"
+        [clearOnEdit]="true"
+      ></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input
+        label="Last name"
+        labelPlacement="floating"
+        required
+        type="text"
+        name="Lastname"
+        errorText="Last name is required"
+        [(ngModel)]="lastname"
+        [clearOnEdit]="true"
+      ></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input
+        label="Email"
+        labelPlacement="floating"
+        required
+        type="email"
+        name="Email"
+        errorText="Email is required / Invalid email"
+        [(ngModel)]="email"
+        [clearOnEdit]="true"
+      ></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input
+        label="username"
+        labelPlacement="floating"
+        required
+        type="text"
+        name="Username"
+        errorText="Username is required"
+        [(ngModel)]="username"
+        [clearOnEdit]="true"
+      ></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input
+        label="password"
+        labelPlacement="floating"
+        required
+        type="password"
+        name="password"
+        minlength="8"
+        maxlength="16"
+        errorText="Password is required"
+        [(ngModel)]="password"
+      ></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input
+        label="bios"
+        labelPlacement="floating"
+        type="text"
+        name="Bios"
+        errorText="Bios is required"
+        [(ngModel)]="bios"
+        [clearOnEdit]="true"
+      ></ion-input>
+    </ion-item>
+
+    <ion-button
+      expand="full"
+      type="submit"
+      [disabled]="!signInForm.valid"
+      shape="round"
+      >Sign Up</ion-button
+    >
+  </form>
+</ion-content>
