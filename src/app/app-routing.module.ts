@@ -22,6 +22,16 @@ const routes: Routes = [
     loadChildren: () =>
       import('./sign-up/sign-up.module').then((m) => m.SignUpPageModule),
   },
+  {
+    path: 'search',
+    loadChildren: () =>
+      import('./search/search.module').then((m) => m.SearchPageModule),
+  },
+  {
+    path: 'feed',
+    loadChildren: () =>
+      import('./feed/feed.module').then((m) => m.FeedPageModule),
+  },
 ];
 
 @NgModule({

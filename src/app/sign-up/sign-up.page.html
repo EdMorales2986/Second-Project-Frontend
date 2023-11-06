@@ -6,7 +6,7 @@
 </ion-header>
 
 <ion-content>
-  <form (ngSubmit)="onSubmit()" #signInForm="ngForm">
+  <form (ngSubmit)="onSubmit()" #signUpForm="ngForm">
     <ion-item>
       <ion-input
         label="Name"
@@ -88,7 +88,7 @@
     <ion-button
       expand="full"
       type="submit"
-      [disabled]="!signInForm.valid"
+      [disabled]="!signUpForm.valid"
       shape="round"
       >Sign Up</ion-button
     >

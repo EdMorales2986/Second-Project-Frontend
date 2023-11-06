@@ -1,0 +1,19 @@
+<ion-card>
+  <ion-card-header>
+    <ion-card-title> {{ dataTW.owner }} </ion-card-title>
+    <ion-card-subtitle>
+      {{ dataTW.createdAt.split("T")[0].split("-").join("/") }}
+    </ion-card-subtitle>
+  </ion-card-header>
+  <ion-card-content>
+    {{ dataTW.desc }}
+  </ion-card-content>
+  <ion-button fill="clear">
+    <ion-icon name="heart-outline"></ion-icon>
+      Like: {{ this.likes }}
+  </ion-button>
+  <ion-button fill="clear">
+    <ion-icon name="chatbubble-outline"></ion-icon>
+      Comment: {{ this.comments }}
+  </ion-button>
+</ion-card>

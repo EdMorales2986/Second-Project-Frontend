@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { AlertController } from '@ionic/angular';
 
 @Component({
@@ -19,16 +19,37 @@ export class SignInPage implements OnInit {
     private alertController: AlertController
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    const jwt = localStorage.getItem('jwt');
+    this.http
+      .post('http://localhost:4000/jwt-verify', {
+        token: `${jwt}`,
+      })
+      .subscribe({
+        next: () => {
+          this.router.navigate(['/home']);
+        },
+        error: () => {
+          this.router.navigate(['']);
+        },
+      });
+  }
 
   onSubmit() {
     this.http
-      .post('http://localhost:4000/signin', {
-        alias: this.username,
-        password: this.password,
-      })
+      .post(
+        'http://localhost:4000/signin',
+        {
+          alias: this.username,
+          password: this.password,
+        },
+        { observe: 'response' }
+      )
       .subscribe({
         next: (response) => {
+          const { jwt }: any = response.body;
+          localStorage.setItem('jwt', jwt);
+          // console.log(jwt);
           this.router.navigate(['/home']);
         },
         error: (error) => {
