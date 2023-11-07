@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Preferences } from '@capacitor/preferences';
 
 @Component({
   selector: 'app-home',
@@ -6,7 +7,13 @@ import { Component } from '@angular/core';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
+  userImg: string;
 
-  constructor() {}
+  constructor() {
+    this.userImg = '';
+  }
 
+  async ngOnInit() {
+    const { value } = await Preferences.get({ key: 'img' });
+  }
 }

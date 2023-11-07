@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { AlertController } from '@ionic/angular';
+import { Preferences } from '@capacitor/preferences';
 
 @Component({
   selector: 'app-sign-in',
@@ -19,17 +20,22 @@ export class SignInPage implements OnInit {
     private alertController: AlertController
   ) {}
 
-  ngOnInit() {
-    const jwt = localStorage.getItem('jwt');
+  async ngOnInit() {
+    // const jwt = localStorage.getItem('jwt');
+    const { value } = await Preferences.get({ key: 'jwt' });
     this.http
       .post('http://localhost:4000/jwt-verify', {
-        token: `${jwt}`,
+        token: `${value}`,
       })
       .subscribe({
         next: () => {
           this.router.navigate(['/home']);
         },
-        error: () => {
+        error: async () => {
+          await Preferences.remove({ key: 'jwt' });
+          await Preferences.remove({ key: 'user' });
+          await Preferences.remove({ key: 'img' });
+          await Preferences.remove({ key: 'bios' });
           this.router.navigate(['']);
         },
       });
@@ -46,10 +52,13 @@ export class SignInPage implements OnInit {
         { observe: 'response' }
       )
       .subscribe({
-        next: (response) => {
-          const { jwt }: any = response.body;
-          localStorage.setItem('jwt', jwt);
-          // console.log(jwt);
+        next: async (response) => {
+          const { jwt, user }: any = response.body;
+          // localStorage.setItem('jwt', jwt);
+          await Preferences.set({ key: 'jwt', value: jwt });
+          await Preferences.set({ key: 'user', value: user.alias });
+          await Preferences.set({ key: 'img', value: user.profilePic });
+          await Preferences.set({ key: 'bios', value: user.bios });
           this.router.navigate(['/home']);
         },
         error: (error) => {

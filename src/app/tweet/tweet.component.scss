@@ -1,47 +1,5 @@
-.tweet-container {
-  border: 1px solid #151515;
-  border-radius: 10px;
-  padding: 12px;
-  margin: 10px;
-  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.25);
-
-  .user-info {
-    font-weight: bold;
-  }
-
-  .tweet-time {
-    color: #999;
-    font-size: 14px;
-    text-align: right; // Justifica a la derecha
-    width: 100%; // Ocupa todo el ancho disponible
-  }
-
-  .date-handle {
-    color: #999;
-    margin-left: 5px;
-    font-weight: lighter;
-  }
-
-  .tweet-content {
-    margin: 10px 0;
-  }
-}
-
-.interactions {
-  margin-top: 10px;
+.imageCard {
   display: flex;
-  justify-content: space-around;
-}
-
-a {
-  font-weight: bold;
-  font-size: 16px;
-
-  cursor: pointer; // Cambia el cursor al puntero al pasar sobre ellos
-  color: inherit; // Hereda el color del texto del contenedor
-
-  ion-icon {
-    margin-right: 5px;
-    font-size: 24px;
-  }
+  justify-content: center;
+  align-items: center;
 }
