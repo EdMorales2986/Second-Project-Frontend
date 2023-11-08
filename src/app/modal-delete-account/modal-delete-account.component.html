@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-button
+      fill="outline"
+      shape="round"
+      color="danger"
+      slot="start"
+      style="margin-left: 10px"
+      (click)="dismissModal()"
+      >Close</ion-button
+    >
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="ion-center">
+    <ion-card shape="round">
+      <ion-card-content>
+        <form (ngSubmit)="onSubmit()" #signUpForm="ngForm">
+          <ion-item>
+            <ion-input
+              label="Password"
+              labelPlacement="floating"
+              type="text"
+              name="Password"
+              errorText="Password is required"
+              required
+              [(ngModel)]="password"
+              [clearOnEdit]="true"
+            ></ion-input>
+          </ion-item>
+
+          <ion-button
+            expand="full"
+            type="submit"
+            [disabled]="!signUpForm.valid"
+            shape="round"
+            color="danger"
+            >Delete Account</ion-button
+          >
+        </form>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

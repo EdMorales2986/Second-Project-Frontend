@@ -1,5 +1,15 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  ViewChild,
+  EventEmitter,
+  Output,
+} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Preferences } from '@capacitor/preferences';
+import { PopoverController } from '@ionic/angular';
+import { IonPopover } from '@ionic/angular/common';
 
 @Component({
   selector: 'app-tweet',
@@ -8,15 +18,63 @@ import { HttpClient } from '@angular/common/http';
 })
 export class TweetComponent implements OnInit {
   @Input() dataTW: any;
+  @ViewChild('popover') popover!: IonPopover;
+  @Output() tweetDeleted = new EventEmitter();
   likes: number;
+  liked: boolean;
   comments: number;
+  user: string = '';
 
   constructor(private http: HttpClient) {
     this.likes = 0;
     this.comments = 0;
+    this.liked = false;
   }
 
-  ngOnInit() {
+  showOptions(event: any) {
+    this.popover.present();
+  }
+
+  delete() {
+    this.popover.dismiss();
+    this.http
+      .delete(
+        `http://localhost:4000/deleteTweet/${this.user}/${this.dataTW._id}`
+      )
+      .subscribe({
+        next: (value: any) => {
+          this.tweetDeleted.emit();
+        },
+        error: (err: any) => console.log(err),
+      });
+  }
+
+  like() {
+    this.http
+      .get(`http://localhost:4000/like/${this.user}/${this.dataTW._id}`)
+      .subscribe({
+        next: (value: any) => {
+          this.liked = value.liked;
+          this.http
+            .get(`http://localhost:4000/likeCount/${this.dataTW._id}`)
+            .subscribe((count: any) => {
+              this.likes = count.count;
+            });
+        },
+        error: (err: any) => console.log(err),
+      });
+  }
+
+  async ngOnInit() {
+    const { value } = await Preferences.get({ key: 'alias' });
+    this.user = value ?? '';
+
+    this.http
+      .get(`http://localhost:4000/likeVerify/${this.user}/${this.dataTW._id}`)
+      .subscribe((value: any) => {
+        this.liked = value.liked;
+      });
+
     this.http
       .get(`http://localhost:4000/likeCount/${this.dataTW._id}`)
       .subscribe((count: any) => {

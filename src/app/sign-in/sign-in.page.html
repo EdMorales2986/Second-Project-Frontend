@@ -5,43 +5,49 @@
 </ion-header>
 
 <ion-content>
-  <form (ngSubmit)="onSubmit()" #signInForm="ngForm">
-    <ion-item>
-      <ion-input
-        label="username"
-        labelPlacement="floating"
-        required
-        type="text"
-        name="Username"
-        errorText="Username is required"
-        [(ngModel)]="username"
-        [clearOnEdit]="true"
-      ></ion-input>
-    </ion-item>
+  <div class="ion-center">
+    <ion-card shape="round">
+      <ion-card-content>
+        <form (ngSubmit)="onSubmit()" #signInForm="ngForm">
+          <ion-item>
+            <ion-input
+              label="Username"
+              labelPlacement="floating"
+              required
+              type="text"
+              name="Username"
+              errorText="Username is required"
+              [(ngModel)]="username"
+              [clearOnEdit]="true"
+            ></ion-input>
+          </ion-item>
 
-    <ion-item>
-      <ion-input
-        label="password"
-        labelPlacement="floating"
-        required
-        type="password"
-        name="password"
-        minlength="8"
-        maxlength="16"
-        errorText="Password is required"
-        [(ngModel)]="password"
-      ></ion-input>
-    </ion-item>
+          <ion-item>
+            <ion-input
+              label="Password"
+              labelPlacement="floating"
+              required
+              type="password"
+              name="password"
+              minlength="8"
+              maxlength="16"
+              errorText="Password is required"
+              [(ngModel)]="password"
+            ></ion-input>
+          </ion-item>
 
-    <ion-button
-      expand="full"
-      type="submit"
-      [disabled]="!signInForm.valid"
-      shape="round"
-      >Sign In</ion-button
-    >
-    <ion-button expand="full" [routerLink]="['/sign-up']" shape="round">
-      Sign Up
-    </ion-button>
-  </form>
+          <ion-button
+            expand="full"
+            type="submit"
+            [disabled]="!signInForm.valid"
+            shape="round"
+            >Sign In</ion-button
+          >
+          <ion-button expand="full" [routerLink]="['/sign-up']" shape="round">
+            Sign Up
+          </ion-button>
+        </form>
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>

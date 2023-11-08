@@ -33,9 +33,9 @@ export class SignInPage implements OnInit {
         },
         error: async () => {
           await Preferences.remove({ key: 'jwt' });
-          await Preferences.remove({ key: 'user' });
-          await Preferences.remove({ key: 'img' });
-          await Preferences.remove({ key: 'bios' });
+          await Preferences.remove({ key: 'alias' });
+          // await Preferences.remove({ key: 'img' });
+          // await Preferences.remove({ key: 'bios' });
           this.router.navigate(['']);
         },
       });
@@ -56,9 +56,9 @@ export class SignInPage implements OnInit {
           const { jwt, user }: any = response.body;
           // localStorage.setItem('jwt', jwt);
           await Preferences.set({ key: 'jwt', value: jwt });
-          await Preferences.set({ key: 'user', value: user.alias });
-          await Preferences.set({ key: 'img', value: user.profilePic });
-          await Preferences.set({ key: 'bios', value: user.bios });
+          await Preferences.set({ key: 'alias', value: user.alias });
+          // await Preferences.set({ key: 'img', value: user.profilePic });
+          // await Preferences.set({ key: 'bios', value: user.bios });
           this.router.navigate(['/home']);
         },
         error: (error) => {

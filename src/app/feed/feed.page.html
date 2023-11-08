@@ -1,5 +1,16 @@
-<ion-content [fullscreen]="true">
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content />
+  </ion-refresher>
+
+  <div>
+    <ion-chip color="tertiary" (click)="newest()">Newest</ion-chip>
+    <ion-chip color="secondary" (click)="oldest()">Oldest</ion-chip>
+    <ion-chip color="danger" (click)="liked()">Liked</ion-chip>
+    <ion-chip color="warning" (click)="followed()">Followed</ion-chip>
+  </div>
+
   <ion-list *ngFor="let tweet of tweets">
-    <app-tweet [dataTW]="tweet"></app-tweet>
+    <app-tweet [dataTW]="tweet" (tweetDeleted)="handleTweetDeletion()"></app-tweet>
   </ion-list>
 </ion-content>

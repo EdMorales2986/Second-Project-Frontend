@@ -1,0 +1,27 @@
+ion-content {
+  background-color: #222428;
+}
+
+.ion-center {
+  background-color: #222428;
+  display: flex;
+  justify-content: center;
+  height: 100%;
+}
+
+ion-card {
+  width: 90%;
+  height: fit-content;
+}
+
+.btnSection {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin-top: 150px;
+}
+
+.btnSection ion-button {
+  display: inline-block;
+}

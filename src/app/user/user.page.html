@@ -1,18 +1,44 @@
 <ion-header>
   <ion-toolbar>
     <ion-back-button slot="start"></ion-back-button>
-    <ion-title>{{this.username}}</ion-title>
+    <ion-title> Account </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-card shape="round">
-    <ion-card-header>
-      <ion-avatar>
-        <img [src]="this.profilePic" />
-      </ion-avatar>
-      <ion-card-title>{{this.username}}</ion-card-title>
-    </ion-card-header>
-    <ion-card-content> {{this.bios}} </ion-card-content>
-  </ion-card>
+  <div class="ion-center">
+    <ion-card shape="round">
+      <ion-card-header>
+        <ion-avatar>
+          <img [src]="this.img" />
+        </ion-avatar>
+        <ion-card-title> {{this.alias}} </ion-card-title>
+        <ion-card-subtitle> Following: {{this.followers}} </ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content> {{this.bio}} </ion-card-content>
+      <ion-card-content class="btnSection">
+        <ion-button
+          fill="outline"
+          shape="round"
+          color="secondary"
+          (click)="changeInfo()"
+          >Modify Information</ion-button
+        >
+        <ion-button
+          fill="outline"
+          shape="round"
+          color="danger"
+          (click)="deleteAccount()"
+          >Delete Account</ion-button
+        >
+        <ion-button
+          (click)="logout()"
+          fill="outline"
+          shape="round"
+          color="success"
+          >Logout</ion-button
+        >
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>

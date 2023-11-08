@@ -1,7 +1,14 @@
 <ion-header>
   <ion-toolbar>
-    <ion-back-button slot="start"></ion-back-button>
-    <ion-title>Sign Up</ion-title>
+    <ion-button
+      fill="outline"
+      shape="round"
+      color="secondary"
+      slot="start"
+      style="margin-left: 10px"
+      (click)="dismissModal()"
+      >Close</ion-button
+    >
   </ion-toolbar>
 </ion-header>
 
@@ -14,7 +21,6 @@
             <ion-input
               label="Name"
               labelPlacement="floating"
-              required
               type="text"
               name="Name"
               errorText="name is required"
@@ -27,7 +33,6 @@
             <ion-input
               label="Last name"
               labelPlacement="floating"
-              required
               type="text"
               name="Lastname"
               errorText="Last name is required"
@@ -40,7 +45,6 @@
             <ion-input
               label="Email"
               labelPlacement="floating"
-              required
               type="email"
               name="Email"
               errorText="Email is required / Invalid email"
@@ -51,22 +55,8 @@
 
           <ion-item>
             <ion-input
-              label="Username"
-              labelPlacement="floating"
-              required
-              type="text"
-              name="Username"
-              errorText="Username is required"
-              [(ngModel)]="username"
-              [clearOnEdit]="true"
-            ></ion-input>
-          </ion-item>
-
-          <ion-item>
-            <ion-input
               label="Password"
               labelPlacement="floating"
-              required
               type="password"
               name="password"
               minlength="8"
@@ -88,12 +78,26 @@
             ></ion-input>
           </ion-item>
 
+          <ion-item>
+            <ion-input
+              label="Old Password"
+              labelPlacement="floating"
+              type="text"
+              name="OldPassword"
+              errorText="Old Password is required"
+              required
+              [(ngModel)]="oldPassword"
+              [clearOnEdit]="true"
+            ></ion-input>
+          </ion-item>
+
           <ion-button
             expand="full"
             type="submit"
             [disabled]="!signUpForm.valid"
             shape="round"
-            >Sign Up</ion-button
+            color="secondary"
+            >Update Information</ion-button
           >
         </form>
       </ion-card-content>

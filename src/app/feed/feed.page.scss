@@ -1,3 +1,17 @@
+ion-content {
+  background-color: #222428;
+}
+
 ion-list {
   background-color: #222428;
+}
+
+div {
+  background-color: #222428;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  height: fit-content;
+  padding-top: 20px;
 }

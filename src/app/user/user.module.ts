@@ -8,13 +8,15 @@ import { UserPageRoutingModule } from './user-routing.module';
 
 import { UserPage } from './user.page';
 
+import { ModalChangeInfoComponent } from '../modal-change-info/modal-change-info.component';
+import { ModalDeleteAccountComponent } from '../modal-delete-account/modal-delete-account.component';
+
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    UserPageRoutingModule
+  imports: [CommonModule, FormsModule, IonicModule, UserPageRoutingModule],
+  declarations: [
+    UserPage,
+    ModalChangeInfoComponent,
+    ModalDeleteAccountComponent,
   ],
-  declarations: [UserPage]
 })
 export class UserPageModule {}
