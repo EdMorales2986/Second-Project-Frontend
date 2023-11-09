@@ -15,27 +15,28 @@ const routes: Routes = [
   {
     path: 'sign-in',
     loadChildren: () =>
-      import('./sign-in/sign-in.module').then((m) => m.SignInPageModule),
+      import('./pages/sign-in/sign-in.module').then((m) => m.SignInPageModule),
   },
   {
     path: 'sign-up',
     loadChildren: () =>
-      import('./sign-up/sign-up.module').then((m) => m.SignUpPageModule),
+      import('./pages/sign-up/sign-up.module').then((m) => m.SignUpPageModule),
   },
   {
     path: 'search',
     loadChildren: () =>
-      import('./search/search.module').then((m) => m.SearchPageModule),
+      import('./pages/search/search.module').then((m) => m.SearchPageModule),
   },
   {
     path: 'feed',
     loadChildren: () =>
-      import('./feed/feed.module').then((m) => m.FeedPageModule),
-  },  {
-    path: 'user',
-    loadChildren: () => import('./user/user.module').then( m => m.UserPageModule)
+      import('./pages/feed/feed.module').then((m) => m.FeedPageModule),
   },
-
+  {
+    path: 'user',
+    loadChildren: () =>
+      import('./pages/user/user.module').then((m) => m.UserPageModule),
+  },
 ];
 
 @NgModule({

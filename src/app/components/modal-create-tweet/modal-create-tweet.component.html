@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-button
+      fill="outline"
+      shape="round"
+      color="secondary"
+      slot="start"
+      style="margin-left: 10px"
+      (click)="dismissModal()"
+      >Close</ion-button
+    >
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="ion-center">
+    <ion-card shape="round">
+      <ion-card-content>
+        <form (ngSubmit)="onSubmit()" #signUpForm="ngForm">
+          <ion-item>
+            <ion-textarea
+              label="Description"
+              labelPlacement="floating"
+              type="text"
+              name="Description"
+              errorText="Description is required"
+              required
+              [(ngModel)]="desc"
+              [clearOnEdit]="true"
+            ></ion-textarea>
+          </ion-item>
+
+          <ion-item>
+            <ion-input
+              label="Url"
+              labelPlacement="floating"
+              type="text"
+              name="Url"
+              errorText="Url is required"
+              [(ngModel)]="url"
+              [clearOnEdit]="true"
+            ></ion-input>
+          </ion-item>
+
+          <ion-button
+            expand="full"
+            type="submit"
+            [disabled]="!signUpForm.valid"
+            shape="round"
+            color="secondary"
+            >Create Tweet</ion-button
+          >
+        </form>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

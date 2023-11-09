@@ -45,8 +45,11 @@ export class ModalChangeInfoComponent implements OnInit {
         next: async () => {
           await Preferences.remove({ key: 'jwt' });
           await Preferences.remove({ key: 'alias' });
+          await Preferences.clear();
           this.modalController.dismiss();
-          this.router.navigate(['/']);
+          this.router.navigate(['/']).then(() => {
+            location.reload();
+          });
         },
         error: (error) => {
           const alert = this.alertController

@@ -4,10 +4,11 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { FeedPageRoutingModule } from './feed-routing.module';
 import { FeedPage } from './feed.page';
-import { TweetComponent } from '../tweet/tweet.component';
+import { TweetComponent } from '../../components/tweet/tweet.component';
+import { ModalCreateTweetComponent } from '../../components/modal-create-tweet/modal-create-tweet.component';
 
 @NgModule({
   imports: [CommonModule, FormsModule, IonicModule, FeedPageRoutingModule],
-  declarations: [FeedPage, TweetComponent],
+  declarations: [FeedPage, TweetComponent, ModalCreateTweetComponent],
 })
 export class FeedPageModule {}

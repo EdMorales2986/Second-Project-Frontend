@@ -6,19 +6,20 @@ import { Location } from '@angular/common';
 import { Preferences } from '@capacitor/preferences';
 
 @Component({
-  selector: 'app-modal-delete-account',
-  templateUrl: './modal-delete-account.component.html',
-  styleUrls: ['./modal-delete-account.component.scss'],
+  selector: 'app-modal-create-tweet',
+  templateUrl: './modal-create-tweet.component.html',
+  styleUrls: ['./modal-create-tweet.component.scss'],
 })
-export class ModalDeleteAccountComponent implements OnInit {
+export class ModalCreateTweetComponent implements OnInit {
   constructor(
     private modalController: ModalController,
     private router: Router,
     private http: HttpClient,
     private location: Location
   ) {}
-  password: string = '';
 
+  desc: string = '';
+  url: string = '';
   @Input() userName!: string;
 
   dismissModal() {
@@ -27,15 +28,13 @@ export class ModalDeleteAccountComponent implements OnInit {
 
   onSubmit() {
     this.http
-      .delete(`http://localhost:4000/${this.userName}/delete`, {
-        body: { password: this.password },
+      .post(`http://localhost:4000/createTweet/${this.userName}`, {
+        desc: this.desc,
+        image: this.url,
       })
       .subscribe({
         next: async () => {
-          await Preferences.remove({ key: 'jwt' });
-          await Preferences.remove({ key: 'alias' });
           this.modalController.dismiss();
-          this.router.navigate(['/']);
         },
         error: (error) => {
           console.error(error);

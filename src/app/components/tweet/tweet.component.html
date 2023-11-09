@@ -1,4 +1,13 @@
 <ion-card shape="round">
+  <ion-button
+    fill="clear"
+    class="ion-float-right"
+    (click)="showOptions($event)"
+    *ngIf="dataTW.owner == this.user"
+  >
+    <ion-icon name="ellipsis-vertical"></ion-icon>
+  </ion-button>
+
   <ion-card-header>
     <ion-card-title> {{ dataTW.owner }} </ion-card-title>
     <ion-card-subtitle>
@@ -11,12 +20,8 @@
   </ion-card-content>
 
   <ion-card-content class="imageCard" *ngIf="dataTW.image">
-    <img style="border-radius: 10px" [src]="dataTW.image" />
+    <img [src]="dataTW.image" />
   </ion-card-content>
-
-  <ion-button fill="clear" class="ion-float-right" (click)="showOptions($event)" *ngIf="dataTW.owner == this.user">
-    <ion-icon name="ellipsis-vertical"></ion-icon>
-  </ion-button>
 
   <ion-popover #popover>
     <ng-template>
@@ -26,13 +31,13 @@
     </ng-template>
   </ion-popover>
 
-  <ion-button fill="clear" (click)="like()">
-    <ion-icon name="heart-outline" *ngIf="!liked" />
-    <ion-icon name="heart" *ngIf="liked" />
+  <ion-button fill="clear" color="danger" (click)="like()">
+    <ion-icon color="danger" name="heart-outline" *ngIf="!liked" />
+    <ion-icon color="danger" name="heart" *ngIf="liked" />
       Likes: {{ this.likes }}
   </ion-button>
-  <ion-button fill="clear">
-    <ion-icon name="chatbubble-outline"></ion-icon>
+  <ion-button color="warning" fill="clear">
+    <ion-icon color="warning" name="chatbubble-outline"></ion-icon>
       Comments: {{ this.comments }}
   </ion-button>
 </ion-card>

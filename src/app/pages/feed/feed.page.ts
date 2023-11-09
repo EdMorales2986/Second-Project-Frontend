@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Preferences } from '@capacitor/preferences';
+import { Router } from '@angular/router';
+import { Location } from '@angular/common';
+import { ModalController } from '@ionic/angular';
+import { ModalCreateTweetComponent } from '../../components/modal-create-tweet/modal-create-tweet.component';
 
 @Component({
   selector: 'app-feed',
@@ -12,8 +16,27 @@ export class FeedPage implements OnInit {
   filter: string;
   user: string;
 
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient,
+    private modalController: ModalController
+  ) {
     (this.filter = 'newFirst'), (this.user = '');
+  }
+
+  openModal() {
+    this.modalController
+      .create({
+        component: ModalCreateTweetComponent,
+        componentProps: {
+          userName: this.user,
+        },
+      })
+      .then((modalElement) => {
+        modalElement.onDidDismiss().then((data) => {
+          this.handleTweetCreation();
+        });
+        modalElement.present();
+      });
   }
 
   newest() {
@@ -56,32 +79,17 @@ export class FeedPage implements OnInit {
     setTimeout(() => {
       switch (this.filter) {
         case 'newFirst':
-          this.http
-            .get('http://localhost:4000/showAllTweetsNew')
-            .subscribe((tweet: any) => {
-              this.tweets = tweet;
-            });
+          this.newest();
           break;
         case 'oldFirst':
-          this.http
-            .get('http://localhost:4000/showAllTweetsOld')
-            .subscribe((tweet: any) => {
-              this.tweets = tweet;
-            });
+          this.oldest();
           break;
         case 'liked':
-          this.http
-            .get(`http://localhost:4000/showAllTweetsLiked/${this.user}`)
-            .subscribe((tweet: any) => {
-              this.tweets = tweet;
-            });
+          this.liked();
           break;
         case 'followed':
-          this.http
-            .get(`http://localhost:4000/showAllFollowedTweets/${this.user}`)
-            .subscribe((tweet: any) => {
-              this.tweets = tweet;
-            });
+          this.followed();
+          break;
       }
 
       event.target.complete();
@@ -92,11 +100,12 @@ export class FeedPage implements OnInit {
     const { value } = await Preferences.get({ key: 'alias' });
     this.user = value ?? '';
 
-    this.http
-      .get('http://localhost:4000/showAllTweetsNew')
-      .subscribe((tweet: any) => {
+    this.http.get('http://localhost:4000/showAllTweetsNew').subscribe({
+      next: (tweet: any) => {
         this.tweets = tweet;
-      });
+      },
+      error: (err: any) => console.log(err),
+    });
   }
 
   handleTweetDeletion() {
@@ -108,12 +117,20 @@ export class FeedPage implements OnInit {
       });
   }
 
-  handleTweetEdit() {
-    this.filter = 'newFirst';
-    this.http
-      .get('http://localhost:4000/showAllTweetsNew')
-      .subscribe((tweet: any) => {
-        this.tweets = tweet;
-      });
+  handleTweetCreation() {
+    switch (this.filter) {
+      case 'newFirst':
+        this.newest();
+        break;
+      case 'oldFirst':
+        this.oldest();
+        break;
+      case 'liked':
+        this.liked();
+        break;
+      case 'followed':
+        this.followed();
+        break;
+    }
   }
 }

@@ -1,0 +1,7 @@
+<ion-content>
+  <ion-searchbar [debounce]="1000" (ionInput)="search($event)"></ion-searchbar>
+
+  <ion-list *ngFor="let user of users">
+    <app-seacrh-result [data]="user"></app-seacrh-result>
+  </ion-list>
+</ion-content>

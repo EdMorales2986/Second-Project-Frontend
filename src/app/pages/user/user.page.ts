@@ -4,8 +4,8 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Location } from '@angular/common';
 import { Preferences } from '@capacitor/preferences';
 import { ModalController } from '@ionic/angular';
-import { ModalChangeInfoComponent } from '../modal-change-info/modal-change-info.component';
-import { ModalDeleteAccountComponent } from '../modal-delete-account/modal-delete-account.component';
+import { ModalChangeInfoComponent } from '../../components/modal-change-info/modal-change-info.component';
+import { ModalDeleteAccountComponent } from '../../components/modal-delete-account/modal-delete-account.component';
 
 @Component({
   selector: 'app-user',
@@ -35,7 +35,10 @@ export class UserPage implements OnInit {
   async logout() {
     await Preferences.remove({ key: 'jwt' });
     await Preferences.remove({ key: 'alias' });
-    this.router.navigate(['/']);
+    await Preferences.clear();
+    this.router.navigate(['/']).then(() => {
+      location.reload();
+    });
   }
 
   async changeInfo() {

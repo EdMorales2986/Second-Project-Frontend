@@ -8,7 +8,6 @@ import {
 } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Preferences } from '@capacitor/preferences';
-import { PopoverController } from '@ionic/angular';
 import { IonPopover } from '@ionic/angular/common';
 
 @Component({
@@ -71,20 +70,22 @@ export class TweetComponent implements OnInit {
 
     this.http
       .get(`http://localhost:4000/likeVerify/${this.user}/${this.dataTW._id}`)
-      .subscribe((value: any) => {
-        this.liked = value.liked;
-      });
-
-    this.http
-      .get(`http://localhost:4000/likeCount/${this.dataTW._id}`)
-      .subscribe((count: any) => {
-        this.likes = count.count;
-      });
-
-    this.http
-      .get(`http://localhost:4000/commentCount/${this.dataTW._id}`)
-      .subscribe((count: any) => {
-        this.comments = count.count;
+      .subscribe({
+        next: (value: any) => {
+          this.liked = value.liked;
+          this.http
+            .get(`http://localhost:4000/likeCount/${this.dataTW._id}`)
+            .subscribe({
+              next: (count: any) => {
+                this.likes = count.count;
+                this.http
+                  .get(`http://localhost:4000/commentCount/${this.dataTW._id}`)
+                  .subscribe((count: any) => {
+                    this.comments = count.count;
+                  });
+              },
+            });
+        },
       });
   }
 }
