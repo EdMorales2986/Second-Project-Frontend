@@ -9,6 +9,7 @@ import {
 import { HttpClient } from '@angular/common/http';
 import { Preferences } from '@capacitor/preferences';
 import { IonPopover } from '@ionic/angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tweet',
@@ -24,7 +25,7 @@ export class TweetComponent implements OnInit {
   comments: number;
   user: string = '';
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
     this.likes = 0;
     this.comments = 0;
     this.liked = false;
@@ -62,6 +63,12 @@ export class TweetComponent implements OnInit {
         },
         error: (err: any) => console.log(err),
       });
+  }
+
+  comment() {
+    this.router.navigate(['/comm-feed'], {
+      queryParams: { id: this.dataTW._id, user: this.user },
+    });
   }
 
   async ngOnInit() {

@@ -1,3 +1,40 @@
-<p>
-  comment works!
-</p>
+<ion-card shape="round">
+  <ion-button
+    fill="clear"
+    class="ion-float-right"
+    (click)="showOptions($event)"
+    *ngIf="dataTW.owner == this.user"
+  >
+    <ion-icon name="ellipsis-vertical"></ion-icon>
+  </ion-button>
+
+  <ion-card-header>
+    <ion-card-title> {{ dataTW.owner }} </ion-card-title>
+    <ion-card-subtitle>
+      {{ dataTW.createdAt.split("T")[0].split("-").join("/") }}
+    </ion-card-subtitle>
+  </ion-card-header>
+
+  <ion-card-content style="color: white">
+    {{ dataTW.desc }}
+  </ion-card-content>
+
+  <ion-card-content class="imageCard" *ngIf="dataTW.image">
+    <img [src]="dataTW.image" />
+  </ion-card-content>
+
+  <ion-popover #popover>
+    <ng-template>
+      <ion-list>
+        <ion-item [button]="true" (click)="edit()">Edit</ion-item>
+        <ion-item [button]="true" (click)="delete()">Delete</ion-item>
+      </ion-list>
+    </ng-template>
+  </ion-popover>
+
+  <ion-button fill="clear" color="danger" (click)="like()">
+    <ion-icon color="danger" name="heart-outline" *ngIf="!liked" />
+    <ion-icon color="danger" name="heart" *ngIf="liked" />
+      Likes: {{ this.likes }}
+  </ion-button>
+</ion-card>

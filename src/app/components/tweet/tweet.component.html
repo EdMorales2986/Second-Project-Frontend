@@ -36,8 +36,8 @@
     <ion-icon color="danger" name="heart" *ngIf="liked" />
       Likes: {{ this.likes }}
   </ion-button>
-  <ion-button color="warning" fill="clear">
+  <ion-button color="warning" fill="clear" (click)="comment()">
     <ion-icon color="warning" name="chatbubble-outline"></ion-icon>
-      Comments: {{ this.comments }}
+      Comments
   </ion-button>
 </ion-card>

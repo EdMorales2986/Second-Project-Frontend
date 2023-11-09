@@ -37,6 +37,13 @@ const routes: Routes = [
     loadChildren: () =>
       import('./pages/user/user.module').then((m) => m.UserPageModule),
   },
+  {
+    path: 'comm-feed',
+    loadChildren: () =>
+      import('./pages/comm-feed/comm-feed.module').then(
+        (m) => m.CommFeedPageModule
+      ),
+  },
 ];
 
 @NgModule({
