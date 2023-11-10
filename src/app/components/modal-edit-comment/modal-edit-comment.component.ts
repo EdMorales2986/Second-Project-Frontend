@@ -15,6 +15,7 @@ export class ModalEditCommentComponent implements OnInit {
   desc: string = '';
   url: string = '';
   userName: string;
+  sending: boolean = false;
   // @Output() commentEdited = new EventEmitter();
   @Input() comment: any;
 
@@ -33,6 +34,7 @@ export class ModalEditCommentComponent implements OnInit {
   }
 
   async onSubmit() {
+    this.sending = true;
     const imageURL = await this.imageStorageService.uploadImage();
     this.url = imageURL;
     console.log(this.url);

@@ -18,6 +18,7 @@ export class ModalDeleteAccountComponent implements OnInit {
     private location: Location
   ) {}
   password: string = '';
+  sending: boolean = false;
 
   @Input() userName!: string;
 
@@ -26,6 +27,7 @@ export class ModalDeleteAccountComponent implements OnInit {
   }
 
   onSubmit() {
+    this.sending = true;
     this.http
       .delete(
         `https://second-project-backend-production.up.railway.app/${this.userName}/delete`,

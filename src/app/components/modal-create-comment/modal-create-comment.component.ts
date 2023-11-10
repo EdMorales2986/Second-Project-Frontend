@@ -22,6 +22,7 @@ export class ModalCreateCommentComponent implements OnInit {
 
   desc: string = '';
   url: string = '';
+  sending: boolean = false;
   @Input() userName!: string;
   @Input() fatherTweet!: string;
 
@@ -30,6 +31,7 @@ export class ModalCreateCommentComponent implements OnInit {
   }
 
   async onSubmit() {
+    this.sending = true;
     const imageURL = await this.imageStorageService.uploadImage();
     this.url = imageURL;
     console.log(this.url);

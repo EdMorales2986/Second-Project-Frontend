@@ -21,6 +21,7 @@ export class ModalCreateTweetComponent implements OnInit {
 
   desc: string = '';
   url: string = '';
+  sending: boolean = false;
   @Input() userName!: string;
 
   dismissModal() {
@@ -28,6 +29,7 @@ export class ModalCreateTweetComponent implements OnInit {
   }
 
   async onSubmit() {
+    this.sending = true;
     const imageURL = await this.imageStorageService.uploadImage();
     this.url = imageURL;
     console.log(this.url);
@@ -42,6 +44,7 @@ export class ModalCreateTweetComponent implements OnInit {
       )
       .subscribe({
         next: async () => {
+          // this.sending = false;
           this.modalController.dismiss();
         },
         error: (error) => {

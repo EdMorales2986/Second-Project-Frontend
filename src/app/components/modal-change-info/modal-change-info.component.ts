@@ -24,6 +24,7 @@ export class ModalChangeInfoComponent implements OnInit {
   lastname: string = '';
   bios: string = '';
   oldPassword: string = '';
+  sending: boolean = false;
 
   @Input() userName!: string;
 
@@ -32,6 +33,7 @@ export class ModalChangeInfoComponent implements OnInit {
   }
 
   onSubmit() {
+    this.sending = true;
     this.http
       .put(
         `https://second-project-backend-production.up.railway.app/${this.userName}/update`,

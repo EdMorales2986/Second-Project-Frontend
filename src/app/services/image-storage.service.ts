@@ -100,9 +100,11 @@ export class ImageStorageService {
 
       // Subir imágenes a Firebase Storage
       for (const image of imagesInDataURLFormat) {
+        console.log(image);
+
         const imageName = `${Date.now()}_${Math.floor(
           Math.random() * 10000
-        )}.jpg`; // Nombre único para cada imagen
+        )}.png`; // Nombre único para cada imagen
         const filePath = `tweets/${imageName}`;
         const storageRef = this.storage.ref(filePath);
         const uploadTask = storageRef.putString(image, 'data_url');

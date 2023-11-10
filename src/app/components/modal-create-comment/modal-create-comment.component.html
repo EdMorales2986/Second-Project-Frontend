@@ -51,7 +51,7 @@
           <ion-button
             expand="full"
             type="submit"
-            [disabled]="!signUpForm.valid"
+            [disabled]="sending || !signUpForm.valid"
             shape="round"
             color="secondary"
             >Create Comment</ion-button
