@@ -44,7 +44,9 @@ export class CommFeedPage implements OnInit {
 
   getComments() {
     this.http
-      .get(`http://localhost:4000/showAllComments/${this.fatherTweet}`)
+      .get(
+        `https://second-project-backend-production.up.railway.app/showAllComments/${this.fatherTweet}`
+      )
       .subscribe((comment: any) => {
         this.comments = comment;
       });

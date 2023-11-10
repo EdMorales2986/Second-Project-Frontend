@@ -29,7 +29,7 @@ export class SignUpPage implements OnInit {
 
   onSubmit() {
     this.http
-      .post('http://localhost:4000/signup', {
+      .post('https://second-project-backend-production.up.railway.app/signup', {
         name: this.name,
         lname: this.lastname,
         email: this.email,

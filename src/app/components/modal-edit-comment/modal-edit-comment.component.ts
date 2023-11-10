@@ -4,6 +4,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { Preferences } from '@capacitor/preferences';
+import { ImageStorageService } from 'src/app/services/image-storage.service';
 
 @Component({
   selector: 'app-modal-edit-comment',
@@ -21,7 +22,8 @@ export class ModalEditCommentComponent implements OnInit {
     private modalController: ModalController,
     private router: Router,
     private http: HttpClient,
-    private location: Location
+    private location: Location,
+    private imageStorageService: ImageStorageService
   ) {
     this.userName = '';
   }
@@ -30,10 +32,14 @@ export class ModalEditCommentComponent implements OnInit {
     this.modalController.dismiss();
   }
 
-  onSubmit() {
+  async onSubmit() {
+    const imageURL = await this.imageStorageService.uploadImage();
+    this.url = imageURL;
+    console.log(this.url);
+
     this.http
       .put(
-        `http://localhost:4000/modifyComment/${this.userName}/${this.comment._id}`,
+        `https://second-project-backend-production.up.railway.app/modifyComment/${this.userName}/${this.comment._id}`,
         {
           desc: this.desc,
           image: this.url,
@@ -53,5 +59,10 @@ export class ModalEditCommentComponent implements OnInit {
   async ngOnInit() {
     const { value } = await Preferences.get({ key: 'alias' });
     this.userName = value ?? '';
+  }
+
+  openGallery() {
+    // this.imageStorageService.logHello();
+    this.imageStorageService.openGallery();
   }
 }

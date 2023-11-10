@@ -27,9 +27,12 @@ export class ModalDeleteAccountComponent implements OnInit {
 
   onSubmit() {
     this.http
-      .delete(`http://localhost:4000/${this.userName}/delete`, {
-        body: { password: this.password },
-      })
+      .delete(
+        `https://second-project-backend-production.up.railway.app/${this.userName}/delete`,
+        {
+          body: { password: this.password },
+        }
+      )
       .subscribe({
         next: async () => {
           await Preferences.remove({ key: 'jwt' });

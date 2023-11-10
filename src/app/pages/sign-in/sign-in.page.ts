@@ -24,9 +24,12 @@ export class SignInPage implements OnInit {
     // const jwt = localStorage.getItem('jwt');
     const { value } = await Preferences.get({ key: 'jwt' });
     this.http
-      .post('http://localhost:4000/jwt-verify', {
-        token: `${value}`,
-      })
+      .post(
+        'https://second-project-backend-production.up.railway.app/jwt-verify',
+        {
+          token: `${value}`,
+        }
+      )
       .subscribe({
         next: () => {
           this.router.navigate(['/home']);
@@ -44,7 +47,7 @@ export class SignInPage implements OnInit {
   onSubmit() {
     this.http
       .post(
-        'http://localhost:4000/signin',
+        'https://second-project-backend-production.up.railway.app/signin',
         {
           alias: this.username,
           password: this.password,

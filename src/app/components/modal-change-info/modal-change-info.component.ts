@@ -33,14 +33,17 @@ export class ModalChangeInfoComponent implements OnInit {
 
   onSubmit() {
     this.http
-      .put(`http://localhost:4000/${this.userName}/update`, {
-        name: this.name,
-        lname: this.lastname,
-        email: this.email,
-        oldPass: this.oldPassword,
-        newPass: this.password,
-        bios: this.bios,
-      })
+      .put(
+        `https://second-project-backend-production.up.railway.app/${this.userName}/update`,
+        {
+          name: this.name,
+          lname: this.lastname,
+          email: this.email,
+          oldPass: this.oldPassword,
+          newPass: this.password,
+          bios: this.bios,
+        }
+      )
       .subscribe({
         next: async () => {
           await Preferences.remove({ key: 'jwt' });

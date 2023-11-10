@@ -4,6 +4,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { Preferences } from '@capacitor/preferences';
+import { ImageStorageService } from 'src/app/services/image-storage.service';
 
 @Component({
   selector: 'app-modal-create-comment',
@@ -15,7 +16,8 @@ export class ModalCreateCommentComponent implements OnInit {
     private modalController: ModalController,
     private router: Router,
     private http: HttpClient,
-    private location: Location
+    private location: Location,
+    private imageStorageService: ImageStorageService
   ) {}
 
   desc: string = '';
@@ -27,10 +29,14 @@ export class ModalCreateCommentComponent implements OnInit {
     this.modalController.dismiss();
   }
 
-  onSubmit() {
+  async onSubmit() {
+    const imageURL = await this.imageStorageService.uploadImage();
+    this.url = imageURL;
+    console.log(this.url);
+
     this.http
       .post(
-        `http://localhost:4000/createComment/${this.userName}/${this.fatherTweet}`,
+        `https://second-project-backend-production.up.railway.app/createComment/${this.userName}/${this.fatherTweet}`,
         {
           desc: this.desc,
           image: this.url,
@@ -47,4 +53,9 @@ export class ModalCreateCommentComponent implements OnInit {
   }
 
   ngOnInit() {}
+
+  openGallery() {
+    // this.imageStorageService.logHello();
+    this.imageStorageService.openGallery();
+  }
 }

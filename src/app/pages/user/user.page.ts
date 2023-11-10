@@ -64,7 +64,9 @@ export class UserPage implements OnInit {
   async ngOnInit() {
     const { value } = await Preferences.get({ key: 'alias' });
     this.http
-      .post('http://localhost:4000/search', { query: `${value}` })
+      .post('https://second-project-backend-production.up.railway.app/search', {
+        query: `${value}`,
+      })
       .subscribe({
         next: (response: any) => {
           // console.log(response);
@@ -78,14 +80,18 @@ export class UserPage implements OnInit {
         },
       });
 
-    this.http.get(`http://localhost:4000/followCount/${value}`).subscribe({
-      next: (response: any) => {
-        // console.log(response.count);
-        this.followers = response.count;
-      },
-      error: (error) => {
-        console.log(error);
-      },
-    });
+    this.http
+      .get(
+        `https://second-project-backend-production.up.railway.app/followCount/${value}`
+      )
+      .subscribe({
+        next: (response: any) => {
+          // console.log(response.count);
+          this.followers = response.count;
+        },
+        error: (error) => {
+          console.log(error);
+        },
+      });
   }
 }

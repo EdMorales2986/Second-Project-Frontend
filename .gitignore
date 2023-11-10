@@ -70,3 +70,7 @@ Thumbs.db
 /www
 node_modules
 android
+# Firebase
+.firebase
+*-debug.log
+.runtimeconfig.json

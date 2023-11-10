@@ -42,7 +42,9 @@ export class FeedPage implements OnInit {
   newest() {
     this.filter = 'newFirst';
     this.http
-      .get('http://localhost:4000/showAllTweetsNew')
+      .get(
+        'https://second-project-backend-production.up.railway.app/showAllTweetsNew'
+      )
       .subscribe((tweet: any) => {
         this.tweets = tweet;
       });
@@ -51,7 +53,9 @@ export class FeedPage implements OnInit {
   oldest() {
     this.filter = 'oldFirst';
     this.http
-      .get('http://localhost:4000/showAllTweetsOld')
+      .get(
+        'https://second-project-backend-production.up.railway.app/showAllTweetsOld'
+      )
       .subscribe((tweet: any) => {
         this.tweets = tweet;
       });
@@ -60,7 +64,9 @@ export class FeedPage implements OnInit {
   liked() {
     this.filter = 'liked';
     this.http
-      .get(`http://localhost:4000/showAllTweetsLiked/${this.user}`)
+      .get(
+        `https://second-project-backend-production.up.railway.app/showAllTweetsLiked/${this.user}`
+      )
       .subscribe((tweet: any) => {
         this.tweets = tweet;
       });
@@ -69,7 +75,9 @@ export class FeedPage implements OnInit {
   followed() {
     this.filter = 'followed';
     this.http
-      .get(`http://localhost:4000/showAllFollowedTweets/${this.user}`)
+      .get(
+        `https://second-project-backend-production.up.railway.app/showAllFollowedTweets/${this.user}`
+      )
       .subscribe((tweet: any) => {
         this.tweets = tweet;
       });
@@ -100,18 +108,24 @@ export class FeedPage implements OnInit {
     const { value } = await Preferences.get({ key: 'alias' });
     this.user = value ?? '';
 
-    this.http.get('http://localhost:4000/showAllTweetsNew').subscribe({
-      next: (tweet: any) => {
-        this.tweets = tweet;
-      },
-      error: (err: any) => console.log(err),
-    });
+    this.http
+      .get(
+        'https://second-project-backend-production.up.railway.app/showAllTweetsNew'
+      )
+      .subscribe({
+        next: (tweet: any) => {
+          this.tweets = tweet;
+        },
+        error: (err: any) => console.log(err),
+      });
   }
 
   handleTweetDeletion() {
     this.filter = 'newFirst';
     this.http
-      .get('http://localhost:4000/showAllTweetsNew')
+      .get(
+        'https://second-project-backend-production.up.railway.app/showAllTweetsNew'
+      )
       .subscribe((tweet: any) => {
         this.tweets = tweet;
       });

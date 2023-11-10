@@ -39,7 +39,7 @@ export class TweetComponent implements OnInit {
     this.popover.dismiss();
     this.http
       .delete(
-        `http://localhost:4000/deleteTweet/${this.user}/${this.dataTW._id}`
+        `https://second-project-backend-production.up.railway.app/deleteTweet/${this.user}/${this.dataTW._id}`
       )
       .subscribe({
         next: (value: any) => {
@@ -51,12 +51,16 @@ export class TweetComponent implements OnInit {
 
   like() {
     this.http
-      .get(`http://localhost:4000/like/${this.user}/${this.dataTW._id}`)
+      .get(
+        `https://second-project-backend-production.up.railway.app/like/${this.user}/${this.dataTW._id}`
+      )
       .subscribe({
         next: (value: any) => {
           this.liked = value.liked;
           this.http
-            .get(`http://localhost:4000/likeCount/${this.dataTW._id}`)
+            .get(
+              `https://second-project-backend-production.up.railway.app/likeCount/${this.dataTW._id}`
+            )
             .subscribe((count: any) => {
               this.likes = count.count;
             });
@@ -76,17 +80,23 @@ export class TweetComponent implements OnInit {
     this.user = value ?? '';
 
     this.http
-      .get(`http://localhost:4000/likeVerify/${this.user}/${this.dataTW._id}`)
+      .get(
+        `https://second-project-backend-production.up.railway.app/likeVerify/${this.user}/${this.dataTW._id}`
+      )
       .subscribe({
         next: (value: any) => {
           this.liked = value.liked;
           this.http
-            .get(`http://localhost:4000/likeCount/${this.dataTW._id}`)
+            .get(
+              `https://second-project-backend-production.up.railway.app/likeCount/${this.dataTW._id}`
+            )
             .subscribe({
               next: (count: any) => {
                 this.likes = count.count;
                 this.http
-                  .get(`http://localhost:4000/commentCount/${this.dataTW._id}`)
+                  .get(
+                    `https://second-project-backend-production.up.railway.app/commentCount/${this.dataTW._id}`
+                  )
                   .subscribe((count: any) => {
                     this.comments = count.count;
                   });

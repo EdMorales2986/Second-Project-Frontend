@@ -16,9 +16,12 @@ export class SearchPage implements OnInit {
   search(event: any) {
     if (event.target.value != '') {
       this.http
-        .post(`http://localhost:4000/search`, {
-          query: `${event.target.value}`,
-        })
+        .post(
+          `https://second-project-backend-production.up.railway.app/search`,
+          {
+            query: `${event.target.value}`,
+          }
+        )
         .subscribe((users: any) => {
           users.forEach((user: any) => {
             if (user.alias == this.user) {

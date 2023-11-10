@@ -30,7 +30,7 @@
             ></ion-textarea>
           </ion-item>
 
-          <ion-item>
+          <!-- <ion-item>
             <ion-input
               label="Url"
               labelPlacement="floating"
@@ -40,6 +40,12 @@
               [(ngModel)]="url"
               [clearOnEdit]="true"
             ></ion-input>
+          </ion-item> -->
+          <ion-item>
+            <ion-button (click)="openGallery()">
+              <ion-icon name="images" color="light" />
+              Upload Image
+            </ion-button>
           </ion-item>
 
           <ion-button

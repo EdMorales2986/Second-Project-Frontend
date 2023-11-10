@@ -19,7 +19,9 @@ export class SeacrhResultComponent implements OnInit {
 
   follow() {
     this.http
-      .get(`http://localhost:4000/follow/${this.user}/${this.data.alias}`)
+      .get(
+        `https://second-project-backend-production.up.railway.app/follow/${this.user}/${this.data.alias}`
+      )
       .subscribe({
         next: (value: any) => {
           this.followed = value.followed;
@@ -33,7 +35,7 @@ export class SeacrhResultComponent implements OnInit {
 
       this.http
         .get(
-          `http://localhost:4000/followVerify/${this.user}/${this.data.alias}`
+          `https://second-project-backend-production.up.railway.app/followVerify/${this.user}/${this.data.alias}`
         )
         .subscribe({
           next: (value: any) => {

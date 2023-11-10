@@ -43,7 +43,7 @@ export class CommentComponent implements OnInit {
     this.popover.dismiss();
     this.http
       .delete(
-        `http://localhost:4000/deleteComment/${this.user}/${this.dataTW._id}`
+        `https://second-project-backend-production.up.railway.app/deleteComment/${this.user}/${this.dataTW._id}`
       )
       .subscribe({
         next: (value: any) => {
@@ -55,12 +55,16 @@ export class CommentComponent implements OnInit {
 
   like() {
     this.http
-      .get(`http://localhost:4000/commentLike/${this.user}/${this.dataTW._id}`)
+      .get(
+        `https://second-project-backend-production.up.railway.app/commentLike/${this.user}/${this.dataTW._id}`
+      )
       .subscribe({
         next: (value: any) => {
           this.liked = value.liked;
           this.http
-            .get(`http://localhost:4000/commentLikeCount/${this.dataTW._id}`)
+            .get(
+              `https://second-project-backend-production.up.railway.app/commentLikeCount/${this.dataTW._id}`
+            )
             .subscribe((count: any) => {
               this.likes = count.count;
             });
@@ -91,12 +95,16 @@ export class CommentComponent implements OnInit {
     this.user = value ?? '';
 
     this.http
-      .get(`http://localhost:4000/likeVerify/${this.user}/${this.dataTW._id}`)
+      .get(
+        `https://second-project-backend-production.up.railway.app/likeVerify/${this.user}/${this.dataTW._id}`
+      )
       .subscribe({
         next: (value: any) => {
           this.liked = value.liked;
           this.http
-            .get(`http://localhost:4000/commentLikeCount/${this.dataTW._id}`)
+            .get(
+              `https://second-project-backend-production.up.railway.app/commentLikeCount/${this.dataTW._id}`
+            )
             .subscribe({
               next: (count: any) => {
                 this.likes = count.count;
