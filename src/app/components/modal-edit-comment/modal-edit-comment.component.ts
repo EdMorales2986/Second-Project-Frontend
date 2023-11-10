@@ -15,6 +15,7 @@ export class ModalEditCommentComponent implements OnInit {
   desc: string = '';
   url: string = '';
   userName: string;
+  selectedImage: string[] = [];
   sending: boolean = false;
   // @Output() commentEdited = new EventEmitter();
   @Input() comment: any;
@@ -65,6 +66,8 @@ export class ModalEditCommentComponent implements OnInit {
 
   openGallery() {
     // this.imageStorageService.logHello();
-    this.imageStorageService.openGallery();
+    this.imageStorageService.openGallery().then(() => {
+      this.selectedImage = this.imageStorageService.selectedImages;
+    });
   }
 }

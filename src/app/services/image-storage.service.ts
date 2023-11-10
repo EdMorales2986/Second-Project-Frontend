@@ -100,7 +100,7 @@ export class ImageStorageService {
 
       // Subir imágenes a Firebase Storage
       for (const image of imagesInDataURLFormat) {
-        console.log(image);
+        // console.log(image);
 
         const imageName = `${Date.now()}_${Math.floor(
           Math.random() * 10000

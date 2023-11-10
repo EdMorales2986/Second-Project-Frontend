@@ -47,6 +47,12 @@
             </ion-button>
           </ion-item>
 
+          <ion-item *ngIf="selectedImage.length > 0">
+            <div class="imageCard">
+              <img [src]="selectedImage[0]" />
+            </div>
+          </ion-item>
+
           <ion-button
             expand="full"
             type="submit"

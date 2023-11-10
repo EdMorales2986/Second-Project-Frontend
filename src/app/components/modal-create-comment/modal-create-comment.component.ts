@@ -23,6 +23,7 @@ export class ModalCreateCommentComponent implements OnInit {
   desc: string = '';
   url: string = '';
   sending: boolean = false;
+  selectedImage: string[] = [];
   @Input() userName!: string;
   @Input() fatherTweet!: string;
 
@@ -58,6 +59,8 @@ export class ModalCreateCommentComponent implements OnInit {
 
   openGallery() {
     // this.imageStorageService.logHello();
-    this.imageStorageService.openGallery();
+    this.imageStorageService.openGallery().then(() => {
+      this.selectedImage = this.imageStorageService.selectedImages;
+    });
   }
 }
